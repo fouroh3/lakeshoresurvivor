@@ -401,7 +401,7 @@ async function action(body: Record<string, unknown>) {
 }
 
 async function handleGet(request: Request, path: string) {
-  if (path === "health") return json({ ok: true, database: databaseConfigured(), organizerConfigured: Boolean(envVars.ORGANIZER_PASSWORD_SALT && envVars.ORGANIZER_PASSWORD_HASH && envVars.SESSION_SECRET), season: "2026" });
+  if (path === "health") return json({ ok: true, database: databaseConfigured(), organizerConfigured: Boolean((envVars.ORGANIZER_PASSWORD || (envVars.ORGANIZER_PASSWORD_SALT && envVars.ORGANIZER_PASSWORD_HASH)) && typeof envVars.SESSION_SECRET === "string" && envVars.SESSION_SECRET.length >= 32), season: "2026" });
   if (path === "public") return json(await publicData());
   if (path === "organizer") {
     if (!await isOrganizer(request)) return json({ error: "Sign in to view organizer tools." }, 401);
