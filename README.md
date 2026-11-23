@@ -28,8 +28,7 @@ SQL migrations live in `netlify/database/migrations`. Netlify applies them durin
 
 ## Required production environment variables
 
-- `ORGANIZER_PASSWORD_SALT`
-- `ORGANIZER_PASSWORD_HASH`
+- `ORGANIZER_PASSWORD` (or `ORGANIZER_PASSWORD_SALT` and `ORGANIZER_PASSWORD_HASH`)
 - `SESSION_SECRET`
 
 The database connection is supplied by Netlify Database. Never commit production secrets.

@@ -277,7 +277,7 @@ export default function Home() {
             </div>
             <div className="panel schedule-panel"><div className="panel-heading"><div><span className="panel-kicker">THE SCHEDULE</span><h3>Draw dates</h3></div><span className="calendar-icon">▦</span></div>
               {data.schedule.length ? <div className="schedule-list">{data.schedule.slice(0, 7).map((item) => { const drawn = data.eliminations.filter((e) => e.draw_date === item.draw_date).length; return <div className="schedule-row" key={item.id}><div className="schedule-date"><b>{new Date(`${item.draw_date}T12:00:00`).toLocaleDateString("en-CA", { day: "2-digit", timeZone: "America/Edmonton" })}</b><small>{new Date(`${item.draw_date}T12:00:00`).toLocaleDateString("en-CA", { month: "short", weekday: "short", timeZone: "America/Edmonton" })}</small></div><div className="schedule-info"><b>{drawn ? `${drawn} of ${item.draws_planned} drawn` : `${item.draws_planned} ${item.draws_planned === 1 ? "name" : "names"} to be drawn`}</b><small>{drawn ? "The list got a little shorter." : "May the odds be mildly festive."}</small></div><span className={drawn ? "schedule-status done" : "schedule-status"}>{drawn ? "DONE" : "UPCOMING"}</span></div>; })}</div> : <div className="panel-empty compact"><span>◷</span><b>No draw dates posted yet.</b><small>The organizer is setting the schedule.</small></div>}
-              <div className="schedule-footnote"><span>✦</span> Draws are random, individual, and logged for review.</div>
+              <div className="schedule-footnote"><span>✦</span> The name comes from the filmed hat draw, then gets recorded for review.</div>
             </div>
           </div>
       <div className="last-draw-bar"><span className="last-draw-icon">✳</span><div><small>LAST NAME DRAWN</small><b>{data.eliminations[0] ? `${data.eliminations[0].name} has been eliminated` : "No one’s been sent home. Yet."}</b></div>{data.eliminations[0] && <span className="last-draw-team">{data.eliminations[0].team_name}</span>}</div>
@@ -321,7 +321,7 @@ export default function Home() {
         ["01", "Choose your entry", "Staff can register one or two entries. Each entry needs one $25 gift card. Choose a regular gift card or a spirits gift card for each."],
         ["02", "Bring the card", "The organizer confirms each card in the dashboard. Once every entry has been checked in, the platform builds balanced teams."],
         ["03", "Your entries split up", "Two entries from the same person are always assigned to different teams. Each entry is tracked separately throughout the game."],
-        ["04", "The draw picks one", "On scheduled dates, one active entry is eliminated at random. The candidate pool and cryptographic proof are recorded for review."],
+        ["04", "The hat picks one", "On scheduled dates, the filmed hat draw eliminates one active entry. The eligible pool and selected entry are recorded in the public history."],
         ["05", "Last team wins", "As soon as only one team has active entries left, that team wins the collected gift-card pot. The organizer records every card’s recipient."],
         ["06", "Start fresh next year", "The organizer can create a new season without carrying over old participants, team assignments, or draw history."],
       ].map(([number, title, body]) => <article className="rule-card" key={number}><span className="rule-number">{number}</span><div><h3>{title}</h3><p>{body}</p></div></article>)}</div>
