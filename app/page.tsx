@@ -190,7 +190,8 @@ export default function Home() {
   useEffect(() => { setDemoMode(new URLSearchParams(window.location.search).get("demo") === "1"); }, []);
   const refresh = useCallback(async () => { try { const useDemoData = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("demo") === "1"; const next = useDemoData ? makeDemoData() : await requestJson<Data>("public"); setData(next); } catch { /* The status panel below gives a retry path. */ } finally { setLoading(false); } }, []);
 
-  useEffect(() => { void refresh(); const timer = window.setInterval(() => void refresh(), 12000); return () => window.clearInterval(timer); }, [refresh]);
+  // Fetch on entry and explicit user actions only. Background polling keeps serverless Postgres awake.
+  useEffect(() => { void refresh(); }, [refresh]);
   useEffect(() => {
     const latest = data?.eliminations?.[0];
     if (!latest) return;
